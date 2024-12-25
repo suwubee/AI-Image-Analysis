@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+  <script src="../lib/marked.min.js"></script>
+  <script src="../shared/config.js"></script>
+  <script src="popup.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-button active" data-tab="result">分析结果</button>
+      <button class="tab-button" data-tab="settings">配置设置</button>
+    </div>
+
+    <div class="tab-content" id="result-tab">
+      <div class="result-section">
+        <div id="paste-area" class="paste-area">
+          <div class="paste-hint">点击此处或按 Ctrl+V 粘贴图片</div>
+        </div>
+        <div id="preview-container" class="preview-container" style="display: none;">
+          <img id="preview-image" alt="预览图片">
+          <div class="button-group">
+            <button id="analyze-button" class="primary-button">开始分析</button>
+            <button id="cancel-button" class="secondary-button">取消</button>
+          </div>
+        </div>
+        <div id="result-content" class="markdown-body"></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="settings-tab" style="display: none;">
+      <div class="settings-section">
+        <h3>API 配置</h3>
+        <div class="input-group">
+          <label for="feature-switch">图片分析功能：</label>
+          <select id="feature-switch">
+            <option value="on">开启</option>
+            <option value="off">关闭</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="api-url">API 地址：</label>
+          <input type="text" id="api-url" value="https://chatapi.aisws.com">
+        </div>
+        <div class="input-group">
+          <label for="api-key">API Key：</label>
+          <input type="password" id="api-key">
+        </div>
+        <div class="input-group">
+          <label for="model-select">模型选择：</label>
+          <select id="model-select">
+            <option value="gpt-4-vision-preview">GPT-4 Vision</option>
+            <option value="gpt-4o-mini" selected>GPT-4o Mini</option>
+            <option value="custom">自定义模型</option>
+          </select>
+          <input type="text" id="custom-model" class="custom-model-input" style="display: none;" placeholder="输入自定义模型名称">
+        </div>
+        <div class="input-group">
+          <label for="image-mode">图片模式：</label>
+          <select id="image-mode">
+            <option value="base64">Base64 编码</option>
+            <option value="url">直接 URL</option>
+          </select>
+        </div>
+        <button id="save-config" class="primary-button">保存配置</button>
+      </div>
+
+      <div class="prompt-section">
+        <h3>提示词设置</h3>
+        <select id="prompt-select"></select>
+        <textarea id="prompt-text" placeholder="输入提示词..."></textarea>
+        <div class="button-group">
+          <button id="save-prompt">保存提示词</button>
+          <button id="new-prompt">新建提示词</button>
+          <button id="delete-prompt" class="danger-button">删除提示词</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="open-window" class="secondary-button">在新窗口中打开</button>
+</body>
+</html> 
